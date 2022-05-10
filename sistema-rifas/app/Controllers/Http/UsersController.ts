@@ -8,7 +8,6 @@ import UserLoginValidator from "App/Validators/UserLoginValidator";
 export default class UsersController {
   public async login({ request, response }: HttpContextContract) {
     Logger.info("Login");
-    console.log(request.headers())
     const [, hash] = request.headers().authorization?.split(" ");
     const [email, password] = Buffer.from(hash, "base64").toString().split(":");
 

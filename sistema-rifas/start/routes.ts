@@ -31,7 +31,7 @@ Route.group(() => {
     Route.get('/', 'ProductsController.index')
     Route.get('/:name', 'ProductsController.index')
   })
-  .prefix('/product')
+  .prefix('/products')
 Route.group(() => {
     Route.post('/add', 'AddressController.store')
     Route.get('/', 'AddressController.index')

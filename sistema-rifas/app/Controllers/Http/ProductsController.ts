@@ -6,9 +6,9 @@ import StoreProductValidator from "App/Validators/StoreProductValidator";
 
 export default class ProductsController {
   public async store({ request, response }: HttpContextContract) {
-    Logger.info("Store Produto");
-    const userData = await request.validate(StoreProductValidator);
-    if(!await Product.create(userData))
+    Logger.info("Store Product");
+    const productData = await request.validate(StoreProductValidator);
+    if(!await Product.create(productData))
 
     // const address 
 

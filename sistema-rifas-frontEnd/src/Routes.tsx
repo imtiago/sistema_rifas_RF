@@ -10,12 +10,14 @@ import TableConcursos from "./components/forms/TableConcursos";
 import TableProducts from "./components/forms/TableProducts";
 import SignIn from "./pages/admin/SignIn";
 import DashBoard from "./pages/admin/DashBoard";
+import Index from "./pages";
 export function AppRoutes() {
   return (
     <Router>
       <Routes>
         {/* <Route path="/Index"></Route> */}
-        <Route path="/" element={<SignIn/>}></Route>
+        <Route path="/" element={<Index/>}></Route>
+        <Route path="/a" element={<SignIn/>}></Route>
         <Route path="/dashBoard" element={<DashBoard/>}></Route>
         <Route path="/usersList" element={<TableUsers/>}></Route>
         <Route path="/concursosList" element={<TableConcursos/>}></Route>

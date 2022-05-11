@@ -33,8 +33,8 @@ import projectsTableData from "layouts/tables/data/projectsTableData";
 import productsTableData from "layouts/tables/data/productsTableData";
 
 function Tables() {
-  // const { columns, rows } = authorsTableData();
-  // const { columns: pColumns, rows: pRows } = projectsTableData();
+  const { columns, rows } = authorsTableData();
+  const { columns: pColumns, rows: pRows } = projectsTableData();
   const { columns, rows } = productsTableData();
 
   return (
@@ -55,7 +55,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Produtos
+                  Usuários
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

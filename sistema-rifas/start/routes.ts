@@ -20,6 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.post('/temperature/calculate', 'UsersController.calculateTemp')
 Route.post('/users/login', 'UsersController.login')
 Route.group(() => {
     Route.post('/add', 'UsersController.store')

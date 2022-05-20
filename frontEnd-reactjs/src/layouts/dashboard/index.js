@@ -34,13 +34,29 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import { api } from "services/api";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
   const [users, setUsers] = useState([])
   const [products, setProducts] = useState([])
   const [concursos, setConcursos] = useState([])
+
+  useEffect(async ()=>{
+
+    // const api = axios.create({url:urlApi});
+
+    const dataUsers = await axios.get("http://localhost:3333/users");
+    if(dataUsers.status === 200){
+      setUsers(dataUsers.data)
+    }
+    const dataProducts = await axios.get("http://localhost:3333/products");
+    if(dataProducts.status === 200){
+      setProducts(dataProducts.data)
+    }
+  },[])
 
   return (
     <DashboardLayout>

@@ -20,7 +20,6 @@ export default class UsersController {
   }
   public async store({ request, response }: HttpContextContract) {
     Logger.info("Store User");
-    console.log(request.all());
     const userData = await request.validate(StoreUserValidator);
     if (!(await User.create(userData)))
       // const address

@@ -6,10 +6,13 @@ export default class Concurso extends BaseModel {
   public id: number
 
   @column()
-  public qntRifas: number
+  public numbers_available: number
+ 
+  @column()
+  public product_id: number
 
   @column.dateTime()
-  public dateApplication: DateTime
+  public completion_date: DateTime
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

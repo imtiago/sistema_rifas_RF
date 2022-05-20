@@ -33,16 +33,42 @@ import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 import { useEffect, useState } from "react";
 
+
+import axios from "axios";
+
+
 export default function data() {
 
-  const [dataProducts, setDataProducts] = useState(async ()=>{
-    // let response = await fetch('http://localhost:3333/products');
-    // if(response.status === 200){
-    //   const data = await response.json();
-    //   setDataProducts(data)
-    // }
-  }
-      );
+  const [dataProducts, setDataProducts] = useState([]);
+
+  useEffect(async ()=>{
+    const dataProducts = await axios.get("http://localhost:3333/products");
+    if(dataProducts.status === 200){
+      const te = dataProducts.map( product => {
+          const rowTable = {
+            project: <Project image={LogoAsana} name={product.name} />,
+            // budget: (
+            //   <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            //     {product.price}
+            //   </MDTypography>
+            // ),
+            // status: (
+            //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            //     product.new
+            //   </MDTypography>
+            // ),
+            // completion: <Progress color="info" value={product.detalhes} />,
+            // action: (
+            //   <MDTypography component="a" href="#" color="text">
+            //     <Icon>more_vert</Icon>
+            //   </MDTypography>
+            // ),
+          }
+          return rowTable;
+        })
+        setDataProducts(te)
+    }
+  },[])
   // const [a, setA] = useState(1);
 
   // useEffect(async ()=>{
@@ -60,7 +86,7 @@ export default function data() {
   // },[])
 
   const loadData = async () => {
-    console.log("estou aqui")
+    // console.log(dataProducts)
     // console.log(dataProducts)
     // return dataProducts.map( product => {
     //   const rowTable = {
@@ -115,8 +141,9 @@ export default function data() {
       { Header: "ações", accessor: "action", align: "center" },
     ],
 
-    rows: loadData()
-    // rows: []
+    // rows: loadData()
+    // rows: [],
+    rows: dataProducts,
     
     // rows: [
     //   {

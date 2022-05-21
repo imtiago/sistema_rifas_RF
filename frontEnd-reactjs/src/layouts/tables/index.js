@@ -31,11 +31,36 @@ import DataTable from "examples/Tables/DataTable";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 import productsTableData from "layouts/tables/data/productsTableData";
+import usersTableData from "layouts/tables/data/usersTableData";
+import concursosTableData from "layouts/tables/data/concursosTableData";
+import { useEffect, useState } from "react";
 
-function Tables() {
-  // const { columns, rows } = authorsTableData();
+function Tables(props) {
+
   // const { columns: pColumns, rows: pRows } = projectsTableData();
-  const { columns, rows } = productsTableData();
+  const { columns, rows } = usersTableData();
+
+  // const [columns, setColumns] = useState([]);
+  // const [rows, setRows] = useState([]);
+
+  useEffect(()=>{
+    if(props.dataType === "produtos"){
+      const t = productsTableData();
+      // setColumns(columns);
+      // console.log(t)
+      // setRows(rows);
+    }else if(props.dataType === "usuarios"){
+      const t = usersTableData();
+      // setColumns(columns);
+      // console.log(t)
+      // setRows(rows);
+    } else if(props.dataType === "concursos"){
+      const t = concursosTableData();
+      // setColumns(columns);
+      // console.log(t)
+      // setRows(rows);
+    }
+  },[])
 
   return (
     <DashboardLayout>
@@ -55,7 +80,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Produtos
+                  {props.name.toUpperCase()}
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

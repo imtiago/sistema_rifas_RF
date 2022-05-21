@@ -26,11 +26,6 @@ import MDProgress from "components/MDProgress";
 
 // Images
 import LogoAsana from "assets/images/small-logos/logo-asana.svg";
-import logoGithub from "assets/images/small-logos/github.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 import { useEffect, useState } from "react";
 
 
@@ -38,78 +33,39 @@ import axios from "axios";
 
 
 export default function data() {
-
+  
   const [dataProducts, setDataProducts] = useState([]);
 
   useEffect(async ()=>{
-    const dataProducts = await axios.get("http://localhost:3333/products");
-    if(dataProducts.status === 200){
-      const te = dataProducts.map( product => {
-          const rowTable = {
-            project: <Project image={LogoAsana} name={product.name} />,
-            // budget: (
-            //   <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            //     {product.price}
-            //   </MDTypography>
-            // ),
-            // status: (
-            //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            //     product.new
-            //   </MDTypography>
-            // ),
-            // completion: <Progress color="info" value={product.detalhes} />,
-            // action: (
-            //   <MDTypography component="a" href="#" color="text">
-            //     <Icon>more_vert</Icon>
-            //   </MDTypography>
-            // ),
-          }
-          return rowTable;
-        })
-        setDataProducts(te)
+    let response = await fetch('http://localhost:3333/products');
+    if(response.status === 200){
+      const data = await response.json();
+      setDataProducts(data)
     }
   },[])
-  // const [a, setA] = useState(1);
 
-  // useEffect(async ()=>{
-  //   // console.log("estou qui")
-  //   // setA(2)
-  //   // console.log(a)
-  //   let response = await fetch('http://localhost:3333/products');
-  //   console.log(response)
-  //   if(response.status === 200){
-  //     const data = await response.json();
-  //     console.log(data)
-  //     setDataProducts(data)
-  //   }
-  //   console.log(dataProducts)
-  // },[])
-
-  const loadData = async () => {
-    // console.log(dataProducts)
-    // console.log(dataProducts)
-    // return dataProducts.map( product => {
-    //   const rowTable = {
-    //     project: <Project image={LogoAsana} name={product.name} />,
-    //     // budget: (
-    //     //   <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //     //     {product.price}
-    //     //   </MDTypography>
-    //     // ),
-    //     // status: (
-    //     //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //     //     product.new
-    //     //   </MDTypography>
-    //     // ),
-    //     // completion: <Progress color="info" value={product.detalhes} />,
-    //     // action: (
-    //     //   <MDTypography component="a" href="#" color="text">
-    //     //     <Icon>more_vert</Icon>
-    //     //   </MDTypography>
-    //     // ),
-    //   }
-    //   return rowTable;
-    // })
+  const loadData = () => {
+    return dataProducts?.map( product => {
+      return {
+            project: <Project image={LogoAsana} name={product.name} />,
+            budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            {product.price}
+          </MDTypography>
+        ),
+        status: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              product.new
+            </MDTypography>
+          ),
+          completion: <Progress color="info" value={product.details} />,
+          action: (
+            <MDTypography component="a" href="#" color="text">
+              <Icon>more_vert</Icon>
+            </MDTypography>
+          ),
+          }
+    })
   }
 
   const Project = ({ image, name }) => (
@@ -124,7 +80,7 @@ export default function data() {
   const Progress = ({ color, value }) => (
     <MDBox display="flex" alignItems="center">
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {value}%
+        {value}
       </MDTypography>
       <MDBox ml={0.5} width="9rem">
         <MDProgress variant="gradient" color={color} value={value} />
@@ -141,125 +97,6 @@ export default function data() {
       { Header: "ações", accessor: "action", align: "center" },
     ],
 
-    // rows: loadData()
-    // rows: [],
-    rows: dataProducts,
-    
-    // rows: [
-    //   {
-    //     project: <Project image={LogoAsana} name="Asana" />,
-    //     budget: (
-    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //         $2,500
-    //       </MDTypography>
-    //     ),
-    //     status: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         working
-    //       </MDTypography>
-    //     ),
-    //     completion: <Progress color="info" value={60} />,
-    //     action: (
-    //       <MDTypography component="a" href="#" color="text">
-    //         <Icon>more_vert</Icon>
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     project: <Project image={logoGithub} name="Github" />,
-    //     budget: (
-    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //         $5,000
-    //       </MDTypography>
-    //     ),
-    //     status: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         done
-    //       </MDTypography>
-    //     ),
-    //     completion: <Progress color="success" value={100} />,
-    //     action: (
-    //       <MDTypography component="a" href="#" color="text">
-    //         <Icon>more_vert</Icon>
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     project: <Project image={logoAtlassian} name="Atlassian" />,
-    //     budget: (
-    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //         $3,400
-    //       </MDTypography>
-    //     ),
-    //     status: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         canceled
-    //       </MDTypography>
-    //     ),
-    //     completion: <Progress color="error" value={30} />,
-    //     action: (
-    //       <MDTypography component="a" href="#" color="text">
-    //         <Icon>more_vert</Icon>
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     project: <Project image={logoSpotify} name="Spotify" />,
-    //     budget: (
-    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //         $14,000
-    //       </MDTypography>
-    //     ),
-    //     status: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         working
-    //       </MDTypography>
-    //     ),
-    //     completion: <Progress color="info" value={80} />,
-    //     action: (
-    //       <MDTypography component="a" href="#" color="text">
-    //         <Icon>more_vert</Icon>
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     project: <Project image={logoSlack} name="Slack" />,
-    //     budget: (
-    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //         $1,000
-    //       </MDTypography>
-    //     ),
-    //     status: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         canceled
-    //       </MDTypography>
-    //     ),
-    //     completion: <Progress color="error" value={0} />,
-    //     action: (
-    //       <MDTypography component="a" href="#" color="text">
-    //         <Icon>more_vert</Icon>
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     project: <Project image={logoInvesion} name="Invesion" />,
-    //     budget: (
-    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-    //         $2,300
-    //       </MDTypography>
-    //     ),
-    //     status: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         done
-    //       </MDTypography>
-    //     ),
-    //     completion: <Progress color="success" value={100} />,
-    //     action: (
-    //       <MDTypography component="a" href="#" color="text">
-    //         <Icon>more_vert</Icon>
-    //       </MDTypography>
-    //     ),
-    //   },
-    // ],
+    rows: loadData()
   };
 }

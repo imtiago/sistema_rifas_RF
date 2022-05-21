@@ -25,8 +25,10 @@ export default class StoreConcursoValidator {
    */
   public schema = schema.create({
     numbers_available: schema.number(),
-    product_id: schema.number(),
-    completion_date: schema.string(),
+    product_id: schema.number([
+      rules.exists({ table: 'produtos', column: 'id' })
+    ]),
+    completion_date: schema.date(),
   });
 
   /**

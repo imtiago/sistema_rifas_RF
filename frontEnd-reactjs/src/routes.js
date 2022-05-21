@@ -38,6 +38,7 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
+// import TableUsers from "layouts/tables";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
@@ -60,18 +61,27 @@ const routes = [
   {
     type: "collapse",
     name: "Usuarios",
+    // key: "tableUsers",
     key: "tables",
     icon:  <Icon fontSize="small">person</Icon>,
-    route: "/tables",
-    component: <Tables />,
+    route: "/usersTable",
+    component: <Tables name="usuarios"/>,
   },
   {
     type: "collapse",
     name: "Produtos",
-    key: "tables",
+    key: "tableProducts",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
+    route: "/productsTable",
+    component: <Tables name="produtos"/>,
+  },
+  {
+    type: "collapse",
+    name: "Concursos",
+    key: "tableConcursos",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/concursosTable",
+    component: <Tables name="concursos"/>,
   },
   {
     type: "collapse",

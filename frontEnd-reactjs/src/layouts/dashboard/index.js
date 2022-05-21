@@ -56,6 +56,10 @@ function Dashboard() {
     if(dataProducts.status === 200){
       setProducts(dataProducts.data)
     }
+    const dataConcursos = await axios.get("http://localhost:3333/concursos");
+    if(dataConcursos.status === 200){
+      setConcursos(dataConcursos.data)
+    }
   },[])
 
   return (

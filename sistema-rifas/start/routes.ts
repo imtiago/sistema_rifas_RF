@@ -34,6 +34,12 @@ Route.group(() => {
   })
   .prefix('/products')
 Route.group(() => {
+    // Route.post('/add', 'ProductsController.store')
+    Route.get('/', 'ConcursosController.index')
+    // Route.get('/:name', 'ProductsController.index')
+  })
+  .prefix('/concursos')
+Route.group(() => {
     Route.post('/add', 'AddressController.store')
     Route.get('/', 'AddressController.index')
   })

@@ -8,7 +8,6 @@ export default class ConcursosController {
     Logger.info("Store Concurso");
     const concursoData = await request.validate(StoreConcursoValidator);
     if (!(await Concurso.create(concursoData)))
-      // const address
 
       return response.created();
   }

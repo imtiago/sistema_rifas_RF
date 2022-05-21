@@ -1,6 +1,6 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class CreateConcursos extends BaseSchema {
+export default class Concurso extends BaseSchema {
   protected tableName = 'concursos'
 
   public async up () {
